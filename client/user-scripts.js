@@ -103,6 +103,7 @@ function tokenChecker() {
   if (accessToken === 'undefined') {
     display.appendChild(header);
     header.textContent = alertText;
+    header.style = "color: #CBCCC7"
     header.setAttribute('id', 'defaultLogin');
     // logintxt.removeChild(userEmail);
   } else {
