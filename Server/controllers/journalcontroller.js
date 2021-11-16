@@ -30,7 +30,6 @@ router.post("/create", validateJWT, async (req, res) => {
     } catch (err) {
         res.status(500).json({error: err});
     }
-    JournalModel.create(journalEntry)
 });
 
 router.get("/about", (req, res) => {
@@ -90,7 +89,7 @@ router.get("/:title", async (req, res) => {
 router.put("/update/:entryId", validateJWT, async (req, res) => {
     const {title, date, entry} = req.body.journal;
     const journalId = req.params.entryId;
-    const userid = req.user.id;
+    const userId = req.user.id;
 
     const query = {
         where: {
