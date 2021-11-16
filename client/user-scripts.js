@@ -91,15 +91,20 @@ function tokenChecker() {
   let header = document.createElement('h5');
   let accessToken = localStorage.getItem('SessionToken');
   let alertText = "Log in or Sign up to get started!";
+  // let logintxt = document.getElementsByClassName(".login")
+  // let userEmail = document.getElementById("emailLogin").value;
 
   for (let i = 0; i < display.childNodes.length; i++) {
     display.removeChild(display.firstChild);
+    // console.log(userEmail)
+    // logintxt.appendChild(userEmail);
   }
 
   if (accessToken === 'undefined') {
     display.appendChild(header);
     header.textContent = alertText;
     header.setAttribute('id', 'defaultLogin');
+    // logintxt.removeChild(userEmail);
   } else {
     null
   }
