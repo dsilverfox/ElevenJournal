@@ -44,7 +44,7 @@ function editJournal(postId) {
   const fetch_url = (`http://localhost:3000/journal/update/${postId}`);
   const accessToken = localStorage.getItem('SessionToken');
 
-  let card = document.getElementById('postId');
+  let card = document.getElementById(postId);
   let input = document.createElement('input');
 
   if (card.childNodes.length < 2) {
@@ -90,7 +90,7 @@ function deleteJournal(postId) {
   const fetch_url = `http://localhost:3000/journal/delete/${postId}`;
   const accessToken = localStorage.getItem('SessionToken');
 
-  fetch_url(fetch_url, {
+  fetch(fetch_url, {
     method: "DELETE",
     headers: new Headers ({
       "Content-Type": "application/json",

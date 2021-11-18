@@ -28,7 +28,7 @@ function userSignUp() {
         console.log(data);
         let token = data.sessionToken;
         localStorage.setItem('SessionToken', token);
-        tokenChecker();
+        protectedViews();
     })
     .catch(err => {
         console.error(err)
@@ -54,7 +54,7 @@ function userLogin() {
 
   console.log(userData);
 
-  fetch(`http://localhost:3000`, {
+  fetch(`http://localhost:3000/user/login`, {
     method: "POST",
     headers: {"Content-Type" : "application/json"}, 
     body: JSON.stringify(userData)
@@ -64,7 +64,7 @@ function userLogin() {
     console.log(data)
     let token = data.sessionToken;
     localStorage.setItem('SessionToken', token);
-    tokenChecker();
+    protectedViews();
     console.log(token);
   })
   .catch(err => {
@@ -79,35 +79,45 @@ function userLogout() {
   console.log("userLogout Function Called");
   localStorage.setItem('SessionToken', undefined);
   console.log(`sessionToken --> ${localStorage.sessionToken}`);
-  tokenChecker();
+  protectedViews();
 }
 
 /* *************************
- *** TOKEN CHECKER FUNCTION ***
+ *** PROTECTED VIEWS FUNCTION ***
  ************************** */
-function tokenChecker() {
-  console.log("tokenChecker Function Called");
-  let display = document.getElementById('journals');
-  let header = document.createElement('h5');
-  let accessToken = localStorage.getItem('SessionToken');
-  let alertText = "Log in or Sign up to get started!";
-  // let logintxt = document.getElementsByClassName(".login")
-  // let userEmail = document.getElementById("emailLogin").value;
+function protectedViews() {
+  const journalPost = document.getElementById("journalEntry");
+  const journalView = document.getElementById("journalView");
 
-  for (let i = 0; i < display.childNodes.length; i++) {
-    display.removeChild(display.firstChild);
-    // console.log(userEmail)
-    // logintxt.appendChild(userEmail);
-  }
+  let token = localStorage.getItem("SessionToken");
+  console.log(token);
 
-  if (accessToken === 'undefined') {
-    display.appendChild(header);
-    header.textContent = alertText;
-    header.style = "color: #CBCCC7"
-    header.setAttribute('id', 'defaultLogin');
-    // logintxt.removeChild(userEmail);
+  if (token === "undefined") {
+    journalPost.style.display = "none";
+    journalView.style.display = "none";
+
+    let loginMessage = document.getElementById("login-message");
+
+    let message = document.createElement("h1");
+    message.setAttribute("id", "message");
+    message.innerText = "Please login or signup to continue";
+    message.style.cssText = `
+            position: absolute;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        `;
+
+    loginMessage.appendChild(message);
   } else {
-    null
+    let loginMessage = document.getElementById("login-message");
+    let message = document.getElementById("message");
+    loginMessage.removeChild(message);
+
+    journalPost.style.display = "block";
+    journalView.style.display = "block";
   }
 }
-tokenChecker();
+
+protectedViews();

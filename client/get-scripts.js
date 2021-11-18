@@ -61,7 +61,7 @@ function displayMine() {
         card.setAttribute('id', current.id);
         card.setAttribute('class', 'card');
         body.setAttribute('class', 'card-body');
-        header.setAttribute('class,', 'card-title');
+        header.setAttribute('class', 'card-title');
         subtitle.setAttribute('class', 'card-subtitle mb-2 text-muted');
         para.setAttribute('class', 'card-text');
 
@@ -95,8 +95,8 @@ function displayMine() {
     .then(data => {
       console.log(data);
 
-      let display = docuent.getElementById('journals');
-      for(i=o; i = display.childNodes.length; i++) {
+      let display = document.getElementById('journals');
+      for(i=0; i = display.childNodes.length; i++) {
         display.removeChild(display.firstChild)
       }
 
@@ -135,13 +135,13 @@ function displayMine() {
         body.appendChild(header);
         body.appendChild(subtitle);
         body.appendChild(para);
-        body.appendChild (editBtn);
-        body.appendChild(deleteBtn);
+        //body.appendChild (editBtn);
+        //body.appendChild(deleteBtn);
 
         card.setAttribute('id', current.id);
         card.setAttribute('class', 'card');
         body.setAttribute('class', 'card-body');
-        header.setAttribute('class,', 'card-title');
+        header.setAttribute('class', 'card-title');
         subtitle.setAttribute('class', 'card-subtitle mb-2 text-muted');
         para.setAttribute('class', 'card-text');
     }}
@@ -170,8 +170,8 @@ fetch(`http://localhost:3000/journal/${journalTitle}`, {
     .then(data => {
       console.log(data);
 
-      let display = docuent.getElementById('journals');
-      for(i=o; i = display.childNodes.length; i++) {
+      let display = document.getElementById('journals');
+      for(i=0; i = display.childNodes.length; i++) {
         display.removeChild(display.firstChild)
       }
 
@@ -216,19 +216,9 @@ fetch(`http://localhost:3000/journal/${journalTitle}`, {
         card.setAttribute('id', current.id);
         card.setAttribute('class', 'card');
         body.setAttribute('class', 'card-body');
-        header.setAttribute('class,', 'card-title');
+        header.setAttribute('class', 'card-title');
         subtitle.setAttribute('class', 'card-subtitle mb-2 text-muted');
         para.setAttribute('class', 'card-text');
-
-        //Edit and Delete buttons, challenge prompt did not include them, solution did.
-
-        // editBtn.setAttribute('class', 'btn btn-dark editBtn');
-        // editBtn.setAttribute('type', 'button');
-        // editBtn.setAttribute('onclick', `editJournal(${current.id})`);
-
-        // deleteBtn.setAttribute('class', 'btn btn-dark deleteBtn');
-        // deleteBtn.setAttribute('type', 'button');
-        // deleteBtn.setAttribute('onclick', `deleteJournal(${current.id})`);
     }}
   })
   .catch(err => {
